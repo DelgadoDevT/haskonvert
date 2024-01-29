@@ -12,7 +12,7 @@ bug-reports:    https://github.com/DelgadoDevT/haskonvert/issues
 author:         João Delgado
 maintainer:     joaoteixeira9053@gmail.com
 copyright:      2024 João Delgado
-license:        MIT License
+license:        MIT
 license-file:   LICENSE
 build-type:     Simple
 extra-source-files:
@@ -25,7 +25,8 @@ source-repository head
 
 library
   exposed-modules:
-      Lib
+      DataTypes
+      UnitConversion
   other-modules:
       Paths_haskonvert
   hs-source-dirs:
@@ -45,6 +46,7 @@ executable haskonvert-exe
   build-depends:
       base >=4.7 && <5
     , haskonvert
+    , gtk3 >= 0.15 && < 1
   default-language: Haskell2010
 
 test-suite haskonvert-test
