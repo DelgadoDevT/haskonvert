@@ -3,7 +3,19 @@ Module: UnitConversion
 Description: Implementations of functions to convert measurements between various units.
 -}
 
-module UnitConversion where 
+{-# OPTIONS_GHC -Wno-type-defaults #-}
+
+module UnitConversion
+  ( convertLength
+  , convertWeigth
+  , convertTemperature
+  , convertSpeed
+  , convertTime
+  , convertArea
+  , convertVolume
+  , convertEnergy
+  , convertByte
+  ) where 
 
 import DataTypes
 
@@ -99,3 +111,124 @@ toSpeed v u =
         Miph -> v * 2.23694
         Cmps -> v / 100
         Mips -> v / 1609.344
+
+convertTime :: Value -> TimeU -> TimeU -> Value
+convertTime v to tn = round2Cen (toTime (toSec v to) tn)
+
+toSec :: Value -> TimeU -> Value
+toSec v u =
+    case u of 
+        S   -> v 
+        Min -> v * 60
+        H   -> v * 3600
+        D   -> v * 86400
+        W   -> v * 604800
+        Mo  -> v * 2628000
+        Y   -> v * 31536000
+
+toTime :: Value -> TimeU -> Value
+toTime v u =
+    case u of 
+        S   -> v 
+        Min -> v / 60
+        H   -> v / 3600
+        D   -> v / 86400
+        W   -> v / 604800
+        Mo  -> v / 2628000
+        Y   -> v / 31536000
+
+convertArea :: Value -> AreaU -> AreaU -> Value
+convertArea v to tn = round2Cen (toArea (toM2 v to) tn)
+
+toM2 :: Value -> AreaU -> Value
+toM2 v u =
+    case u of 
+        M2  -> v
+        Yd2 -> v * 0.836127
+        Cm2 -> v * 0.0001
+        Mi2 -> v * 2589988.110336
+        Ft2 -> v * 0.092903
+        Mm2 -> v * 1.0e-6
+        Km2 -> v * 1.0e6
+
+toArea :: Value -> AreaU -> Value
+toArea v u =
+    case u of 
+        M2  -> v
+        Yd2 -> v / 0.836127
+        Cm2 -> v / 0.0001
+        Mi2 -> v / 2589988.110336
+        Ft2 -> v / 0.092903
+        Mm2 -> v / 1.0e-6
+        Km2 -> v / 1.0e6
+
+convertVolume :: Value -> VolumeU -> VolumeU -> Value
+convertVolume v to tn = round2Cen (toVolume (toM3 v to) tn)
+
+toM3 :: Value -> VolumeU -> Value
+toM3 v u =
+    case u of  
+        M3  -> v 
+        Km3 -> v * 1.0e9
+        Dm3 -> v * 0.001
+        Mm3 -> v * 1.0e-9
+        Ft3 -> v * 0.0283168
+        Yd3 -> v * 0.764555
+        Gal -> v * 0.00378541
+        In3 -> v * 0.000016387
+        L   -> v * 0.001
+
+toVolume :: Value -> VolumeU -> Value
+toVolume v u = 
+    case u of  
+        M3  -> v 
+        Km3 -> v / 1.0e9
+        Dm3 -> v / 0.001
+        Mm3 -> v / 1.0e-9
+        Ft3 -> v / 0.0283168
+        Yd3 -> v / 0.764555
+        Gal -> v / 0.00378541
+        In3 -> v / 0.000016387
+        L   -> v / 0.001
+
+convertEnergy :: Value -> EnergyU -> EnergyU -> Value
+convertEnergy v to tn = round2Cen (toEnergy (toJoule v to) tn)
+
+toJoule :: Value -> EnergyU -> Value
+toJoule v u =
+    case u of
+        J    -> v
+        Kj   -> v * 1000
+        Kwh  -> v * 3.6e6
+        Cal  -> v * 4.184
+        Kcal -> v * 4184
+
+toEnergy :: Value -> EnergyU -> Value
+toEnergy v u =
+    case u of
+        J    -> v
+        Kj   -> v / 1000
+        Kwh  -> v / 3.6e6
+        Cal  -> v / 4.184
+        Kcal -> v / 4184
+
+convertByte :: Value -> ByteU -> ByteU -> Value
+convertByte v to tn = round2Cen (fromByte (toByte v to) tn)
+
+toByte :: Value -> ByteU -> Value
+toByte v u =
+    case u of
+        B  -> v
+        Kb -> v * 1024
+        Mb -> v * 1048576
+        Gb -> v * 1073741824
+        Tb -> v * 1099511627776
+
+fromByte :: Value -> ByteU -> Value
+fromByte v u =
+    case u of
+        B  -> v
+        Kb -> v / 1024
+        Mb -> v / 1048576
+        Gb -> v / 1073741824
+        Tb -> v / 1099511627776
