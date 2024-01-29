@@ -31,6 +31,7 @@ cabal.project.local~
 !.vscode/launch.json
 !.vscode/extensions.json
 !.vscode/*.code-snippets
+.vscode
 
 # Local History for Visual Studio Code
 .history/
@@ -42,3 +43,7 @@ cabal.project.local~
 # Ignore all local history of files
 .history
 .ionide
+
+# Ignore Stack-related files
+.stack-work/
+stack.yaml.lock
