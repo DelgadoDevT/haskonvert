@@ -1,6 +1,10 @@
 module Main (main) where
 
-import Lib
+import DataTypes ()
+
+import UnitConversion ()
+
+import Graphics.UI.Gtk ()
 
 main :: IO ()
-main = someFunc
+main = putStrLn "Hello, World!"
