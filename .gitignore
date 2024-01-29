@@ -31,7 +31,7 @@ cabal.project.local~
 !.vscode/launch.json
 !.vscode/extensions.json
 !.vscode/*.code-snippets
-.vscode
+haskonvert.code-workspace
 
 # Local History for Visual Studio Code
 .history/
