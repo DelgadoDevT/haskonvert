@@ -15,12 +15,21 @@ module UnitConversion
   , convertVolume
   , convertEnergy
   , convertByte
+  , intToLength
+  , intToWeigth
+  , intToTemperature
+  , intToSpeed
+  , intToTime
+  , intToArea
+  , intToVolume
+  , intToEnergy
+  , intToByte
   ) where 
 
 import DataTypes
 
 round2Cen :: Value -> Value
-round2Cen x = fromIntegral (round (x * 100)) / 100
+round2Cen x = fromIntegral (round (x * 1000)) / 1000
 
 convertLength :: Value -> LengthU -> LengthU -> Value
 convertLength v to tn = round2Cen (toLength (toMeter v to) tn)
@@ -232,3 +241,95 @@ fromByte v u =
         Mb -> v / 1048576
         Gb -> v / 1073741824
         Tb -> v / 1099511627776
+
+intToLength :: Int -> LengthU
+intToLength i = case i of
+    0 -> Km
+    1 -> Hm
+    2 -> Dam
+    3 -> M
+    4 -> Dm
+    5 -> Cm
+    6 -> Mm
+    7 -> Ft
+    8 -> Mi
+    9 -> Yd
+    _ -> error "Invalid Unit"
+
+intToWeigth :: Int -> WeightU
+intToWeigth i = case i of
+    0 -> T
+    1 -> Kg
+    2 -> G
+    3 -> Mg
+    4 -> Lb
+    _ -> error "Invalid Unit"
+
+intToTemperature :: Int -> TemperatureU
+intToTemperature i = case i of
+    0 -> C
+    1 -> F
+    2 -> K
+    _ -> error "Invalid Unit"
+
+intToSpeed :: Int -> SpeedU
+intToSpeed i = case i of
+    0 -> Mps
+    1 -> Kmph
+    2 -> Miph 
+    3 -> Cmps 
+    4 -> Mips
+    _ -> error "Invalid Unit"
+
+intToTime :: Int -> TimeU
+intToTime i = case i of 
+    0 -> S 
+    1 -> Min 
+    2 -> H 
+    3 -> D 
+    4 -> W 
+    5 -> Mo 
+    6 -> Y 
+    _ -> error "Invalid Unit"
+
+intToArea :: Int -> AreaU
+intToArea i = case i of 
+    0 -> Yd2
+    1 -> Cm2 
+    2 -> Mi2 
+    3 -> Ft2
+    4 -> Mm2 
+    5 -> Km2 
+    6 -> M2 
+    _ -> error "Invalid Unit"
+
+intToVolume :: Int -> VolumeU
+intToVolume i = case i of 
+    0 -> Km3 
+    1 -> M3 
+    2 -> Dm3 
+    3 -> Mm3 
+    4 -> Ft3 
+    5 -> Yd3 
+    6 -> Gal 
+    7 -> In3 
+    8 -> L 
+    _ -> error "Invalid Unit"
+
+intToEnergy :: Int -> EnergyU 
+intToEnergy i = case i of 
+    0 -> J 
+    1 -> Kj 
+    2 -> Kwh 
+    3 -> Cal 
+    4 -> Kcal 
+    _ -> error "Invalid Unit"
+
+intToByte :: Int -> ByteU 
+intToByte i = case i of 
+    0 -> B
+    1 -> Kb 
+    2 -> Mb
+    3 -> Gb
+    4 -> Tb
+    _ -> error "Invalid Unit"
