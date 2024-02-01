@@ -5,17 +5,6 @@ Description: This module provides essential data types used across the program.
 
 module DataTypes (module DataTypes) where
 
-data UnitsPack = LengthC LengthU
-               | WeightC WeightU 
-               | TemperatureC TemperatureU
-               | SpeedC SpeedU
-               | TimeC TimeU
-               | AreaC AreaU
-               | VolumeC VolumeU
-               | EnergyC EnergyU
-               | ByteC ByteU
-               deriving Show 
-
 data LengthU = Km | Hm | Dam | M | Dm | Cm | Mm | Ft | Mi | Yd deriving Show
 
 data WeightU = T | Kg | G | Mg | Lb deriving Show
