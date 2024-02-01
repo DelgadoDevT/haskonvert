@@ -47,6 +47,7 @@ executable haskonvert-exe
       base >=4.7 && <5
     , haskonvert
     , gtk3 >= 0.15 && < 1
+    , text >= 2.0.2
   default-language: Haskell2010
 
 test-suite haskonvert-test
