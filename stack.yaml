@@ -23,6 +23,7 @@ resolver:
 extra-deps:
   - gtk-0.15.8
   - text-2.0.2
+  - HUnit-1.6.2.0
 
 # User packages to be built.
 # Various formats can be used as shown in the example below.
