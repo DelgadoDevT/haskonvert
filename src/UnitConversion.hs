@@ -28,11 +28,8 @@ module UnitConversion
 
 import DataTypes
 
-round2Cen :: Value -> Value
-round2Cen x = fromIntegral (round (x * 1000)) / 1000
-
 convertLength :: Value -> LengthU -> LengthU -> Value
-convertLength v to tn = round2Cen (toLength (toMeter v to) tn)
+convertLength v to tn = toLength (toMeter v to) tn
 
 toMeter :: Value -> LengthU -> Value
 toMeter v u =
@@ -63,7 +60,7 @@ toLength v u =
         Yd  -> v / 0.9144
 
 convertWeigth :: Value -> WeightU -> WeightU -> Value
-convertWeigth v to tn = round2Cen (toWeight (toGram v to) tn )
+convertWeigth v to tn = toWeight (toGram v to) tn 
 
 toGram :: Value -> WeightU -> Value
 toGram v u = 
@@ -71,7 +68,7 @@ toGram v u =
         T  -> v * 1e6
         Kg -> v * 1000
         G  -> v 
-        Mg -> v / 0.001
+        Mg -> v * 0.001
         Lb  -> v * 453.592
 
 toWeight :: Value -> WeightU -> Value
@@ -80,11 +77,11 @@ toWeight v u =
         T  -> v / 1e6
         Kg -> v / 1000
         G  -> v 
-        Mg -> v * 0.001
+        Mg -> v / 0.001
         Lb  -> v / 453.592
 
 convertTemperature :: Value -> TemperatureU -> TemperatureU -> Value
-convertTemperature v to tn = round2Cen (toTemperature (toCelsius v to) tn)
+convertTemperature v to tn = toTemperature (toCelsius v to) tn
 
 toCelsius :: Value -> TemperatureU -> Value
 toCelsius v u =
@@ -101,7 +98,7 @@ toTemperature v u =
         K -> v + 273.15
 
 convertSpeed :: Value -> SpeedU -> SpeedU -> Value
-convertSpeed v to tn = round2Cen (toSpeed (toMps v to) tn)
+convertSpeed v to tn = toSpeed (toMps v to) tn
 
 toMps :: Value -> SpeedU -> Value
 toMps v u = 
@@ -122,7 +119,7 @@ toSpeed v u =
         Mips -> v / 1609.344
 
 convertTime :: Value -> TimeU -> TimeU -> Value
-convertTime v to tn = round2Cen (toTime (toSec v to) tn)
+convertTime v to tn = toTime (toSec v to) tn
 
 toSec :: Value -> TimeU -> Value
 toSec v u =
@@ -147,7 +144,7 @@ toTime v u =
         Y   -> v / 31536000
 
 convertArea :: Value -> AreaU -> AreaU -> Value
-convertArea v to tn = round2Cen (toArea (toM2 v to) tn)
+convertArea v to tn = toArea (toM2 v to) tn
 
 toM2 :: Value -> AreaU -> Value
 toM2 v u =
@@ -172,7 +169,7 @@ toArea v u =
         Km2 -> v / 1.0e6
 
 convertVolume :: Value -> VolumeU -> VolumeU -> Value
-convertVolume v to tn = round2Cen (toVolume (toM3 v to) tn)
+convertVolume v to tn = toVolume (toM3 v to) tn
 
 toM3 :: Value -> VolumeU -> Value
 toM3 v u =
@@ -201,7 +198,7 @@ toVolume v u =
         L   -> v / 0.001
 
 convertEnergy :: Value -> EnergyU -> EnergyU -> Value
-convertEnergy v to tn = round2Cen (toEnergy (toJoule v to) tn)
+convertEnergy v to tn = toEnergy (toJoule v to) tn
 
 toJoule :: Value -> EnergyU -> Value
 toJoule v u =
@@ -222,7 +219,7 @@ toEnergy v u =
         Kcal -> v / 4184
 
 convertByte :: Value -> ByteU -> ByteU -> Value
-convertByte v to tn = round2Cen (fromByte (toByte v to) tn)
+convertByte v to tn = fromByte (toByte v to) tn
 
 toByte :: Value -> ByteU -> Value
 toByte v u =
