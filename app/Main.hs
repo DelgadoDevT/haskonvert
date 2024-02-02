@@ -1,3 +1,8 @@
+{-| 
+Module: Main
+Description: Implementation of the graphical part of the converter
+-}
+
 module Main (main) where
 
 import DataTypes
