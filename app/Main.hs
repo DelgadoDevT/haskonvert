@@ -15,6 +15,13 @@ import Control.Monad.IO.Class (liftIO)
 
 import qualified Data.Text as T
 
+{-| 
+This module employs the GTK library to construct the graphical user interface for the program. 
+The interface includes distinct menus corresponding to each conversion scale, facilitating user-friendly and interactive unit selection for efficient and intuitive conversions.
+-}
+
+-- \ The next functions create selection boxes where the conversion units are stored within each menu
+
 createcoB1 :: IO ComboBox
 createcoB1 = do
     combo <- comboBoxNewText
@@ -69,9 +76,14 @@ createcoB9 = do
     mapM_ (comboBoxAppendText combo . T.pack . show) [B, Kb, Mb, Gb, Tb]
     return combo
 
+-- \ This is the main function, where all graphical settings are stored
 main :: IO ()
 main = do
+
+    -- \ Used to initialize the graphic part of the aplication
     _ <- initGUI
+
+    -- \ All windows referent to the menus
 
     window1 <- windowNew
     windowSetPosition window1 WinPosCenter
@@ -163,6 +175,8 @@ main = do
                  , windowDefaultHeight  := 800
                  ]
 
+    -- \ The functional part of the button to close the window and consequently the program
+
     _ <- on window1 deleteEvent $ do
         liftIO mainQuit
         return False
@@ -202,6 +216,8 @@ main = do
     _ <- on window10 deleteEvent $ do 
         liftIO mainQuit
         return False
+ 
+    -- \ The grids to center all widgets
 
     table1 <- tableNew 4 3 True
     tableSetColSpacing table1 0 10
@@ -264,7 +280,10 @@ main = do
     tableSetRowSpacing table10 1 10
     tableSetRowSpacing table10 2 10
 
+    -- \ Image of the main menu
     image1 <- imageNewFromFile "src/Resources/logo.png"
+
+    -- \ Some application simple buttons
 
     button1 <- buttonNewWithLabel "Length"
     _ <- on button1 buttonActivated $ do
@@ -356,6 +375,8 @@ main = do
         widgetHide window10
         widgetShowAll window1
 
+    -- \ The selection entrys that can be filled in and updated
+
     entryi1 <- entryNew
     set entryi1 [entryText := "0", entryXalign := 0.5]
 
@@ -410,6 +431,8 @@ main = do
     entryf9 <- entryNew
     set entryf9 [entryEditable := False, entryText := "", entryXalign := 0.5]
 
+    -- \ The boxes that store all units
+
     co1 <- createcoB1
     _ <- comboBoxSetActive co1 0
     
@@ -463,6 +486,8 @@ main = do
 
     cn9 <- createcoB9
     _ <- comboBoxSetActive cn9 0
+
+    -- \ The buttons to convert units in a specific scale
 
     buttona <- buttonNewWithLabel "Convert"
     _ <- on buttona buttonActivated $ do
@@ -563,6 +588,8 @@ main = do
         let r = convertByte n uP uN
         entrySetText entryf9 (show r)
 
+    -- \ Grid alignment properties
+
     tableAttachDefaults table1 image1  0 3 0 1
     tableAttachDefaults table1 button1 0 1 1 2
     tableAttachDefaults table1 button2 1 2 1 2
@@ -637,6 +664,7 @@ main = do
     tableAttachDefaults table10 entryf9  0 1 1 2
     tableAttachDefaults table10 button18 2 3 0 3
 
+    -- \ Merging windows with widgets in grids
     containerAdd window1 table1
     containerAdd window2 table2 
     containerAdd window3 table3
@@ -648,5 +676,8 @@ main = do
     containerAdd window9 table9
     containerAdd window10 table10   
 
+    -- \ The starting window
     widgetShowAll window1
+
+    -- \ Initiate the main event loop for this graphical user interface
     mainGUI
