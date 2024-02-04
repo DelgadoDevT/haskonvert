@@ -19,7 +19,6 @@ The application offers conversion capabilities across nine distinct unit types:
 <div align="center">
   <img src="src/Resources/1.png" alt="s1" width="300" height="380">
   <img src="src/Resources/2.png" alt="s2" width="300" height="380">
-  <img src="src/Resources/3.png" alt="s3" width="300" height="380">
 </div>
 
 ## Prerequisites
