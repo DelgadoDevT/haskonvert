@@ -358,20 +358,20 @@ toByte :: Value -> ByteU -> Value
 toByte v u =
     case u of
         B  -> v
-        Kb -> v * 1024
-        Mb -> v * 1048576
-        Gb -> v * 1073741824
-        Tb -> v * 1099511627776
+        Kb -> v * 1000
+        Mb -> v * 1000000
+        Gb -> v * 1000000000
+        Tb -> v * 1000000000000
 
 -- | Converts a value from bytes to the specified unit
 fromByte :: Value -> ByteU -> Value
 fromByte v u =
     case u of
         B  -> v
-        Kb -> v / 1024
-        Mb -> v / 1048576
-        Gb -> v / 1073741824
-        Tb -> v / 1099511627776
+        Kb -> v / 1000
+        Mb -> v / 1000000
+        Gb -> v / 1000000000
+        Tb -> v / 1000000000000
 
 -- | Converts a number to the corresponding byte unit
 intToByte :: Int -> ByteU 
